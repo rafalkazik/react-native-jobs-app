@@ -9,6 +9,7 @@ import {
   ScreenHeaderBtn,
   Welcome,
 } from '../components';
+import { StatusBar } from 'expo-status-bar';
 
 const Home = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const Home = () => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
+          <StatusBar style='dark' />
           <Welcome />
           <Popularjobs />
           <Nearbyjobs />
