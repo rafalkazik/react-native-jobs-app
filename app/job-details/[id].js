@@ -14,6 +14,7 @@ import {
   JobFooter,
   JobTabs,
   ScreenHeaderBtn,
+  Specifics,
 } from '../../components';
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
@@ -35,20 +36,43 @@ const JobDetails = () => {
 
   const onRefresh = () => {};
 
+  const displayTabContent = () => {
+    switch (activeTab) {
+      case 'Qualifications':
+        return (
+          <Specifics
+            title='Qualifications'
+            points={data[0].job_highlights?.Qualifications ?? ['No data']}
+          />
+        );
+      case 'About':
+        return <JobAbout info={data[0].job_description ?? 'No data'} />;
+      case 'Responsibilities':
+        return (
+          <Specifics
+            title='Responsibilities'
+            points={data[0].job_highlights?.Responsibilities ?? ['No data']}
+          />
+        );
+      default:
+        break;
+    }
+  };
+
   const handleShare = async () => {
     try {
       if (await Sharing.isAvailableAsync()) {
-        const content = 'Treść do udostępnienia';
+        const content = 'Content to share';
         const filePath = `${FileSystem.cacheDirectory}share.txt`;
 
         await FileSystem.writeAsStringAsync(filePath, content);
 
         await Sharing.shareAsync(filePath);
       } else {
-        console.log('Udostępnianie niedostępne na tym urządzeniu');
+        console.log('Something went wrong');
       }
     } catch (error) {
-      console.error('Błąd podczas udostępniania:', error);
+      console.error(error);
     }
   };
 
@@ -103,6 +127,7 @@ const JobDetails = () => {
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
               />
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>
