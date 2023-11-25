@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { checkImageURL } from '../../../../utils';
 import styles from './popularjobcard.style';
 
 const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
-  console.log(item?.job_location);
   return (
     <TouchableOpacity
       style={styles.container(selectedJob, item)}
@@ -13,9 +11,10 @@ const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
       <TouchableOpacity style={styles.logoContainer(selectedJob, item)}>
         <Image
           source={{
-            uri: checkImageURL(item?.employer_logo)
-              ? item?.employer_logo
-              : 'https://designbundles.net/vitaly-mock-ups-and-logos/619889-company-logo',
+            uri:
+              item?.employer_logo === null
+                ? 'https://i.fbcd.co/products/resized/resized-1500-1000/35fa221b9125551fc13446133b8d980337655e15f27b10dfb205db407ab13975.webp'
+                : item?.employer_logo,
           }}
           resizeMode='contain'
           style={styles.logoImage}
