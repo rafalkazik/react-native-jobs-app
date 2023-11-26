@@ -9,9 +9,15 @@ import {
 import { Stack, useRouter, useSearchParams } from 'expo-router';
 import { Text, SafeAreaView } from 'react-native';
 import axios from 'axios';
-
+import { useTheme } from '../../context/ThemeContext';
 import { ScreenHeaderBtn, NearbyJobCard } from '../../components';
-import { COLORS, icons, SIZES } from '../../constants';
+import {
+  COLORS,
+  DARK_COLORS,
+  LIGHT_COLORS,
+  icons,
+  SIZES,
+} from '../../constants';
 import styles from '../../styles/search';
 
 const JobSearch = () => {
@@ -22,6 +28,8 @@ const JobSearch = () => {
   const [searchLoader, setSearchLoader] = useState(false);
   const [searchError, setSearchError] = useState(null);
   const [page, setPage] = useState(1);
+
+  const { isNightMode } = useTheme();
 
   const handleSearch = async () => {
     setSearchLoader(true);
@@ -66,10 +74,21 @@ const JobSearch = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: isNightMode
+          ? DARK_COLORS.darkGrey
+          : LIGHT_COLORS.lightWhite,
+      }}
+    >
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: COLORS.lightWhite },
+          headerStyle: {
+            backgroundColor: isNightMode
+              ? DARK_COLORS.darkGrey
+              : LIGHT_COLORS.lightWhite,
+          },
           headerShadowVisible: false,
           headerLeft: () => (
             <ScreenHeaderBtn
@@ -95,8 +114,10 @@ const JobSearch = () => {
         ListHeaderComponent={() => (
           <>
             <View style={styles.container}>
-              <Text style={styles.searchTitle}>{params.id}</Text>
-              <Text style={styles.noOfSearchedJobs}>Job Opportunities</Text>
+              <Text style={styles.searchTitle(isNightMode)}>{params.id}</Text>
+              <Text style={styles.noOfSearchedJobs(isNightMode)}>
+                Job Opportunities
+              </Text>
             </View>
             <View style={styles.loaderContainer}>
               {searchLoader ? (
@@ -119,8 +140,8 @@ const JobSearch = () => {
                 resizeMode='contain'
               />
             </TouchableOpacity>
-            <View style={styles.paginationTextBox}>
-              <Text style={styles.paginationText}>{page}</Text>
+            <View style={styles.paginationTextBox(isNightMode)}>
+              <Text style={styles.paginationText(isNightMode)}>{page}</Text>
             </View>
             <TouchableOpacity
               style={styles.paginationButton}

@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import styles from './footer.style';
 import { icons } from '../../../constants';
 
-const Footer = ({ url }) => {
+const Footer = ({ url, isNightMode }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container(isNightMode)}>
       <TouchableOpacity style={styles.likeBtn}>
         <Image
           source={icons.heartOutline}

@@ -11,6 +11,7 @@ import styles from './popularjobs.style';
 import { COLORS, SIZES } from '../../../constants';
 import PopularJobCard from '../../common/cards/popular/PopularJobCard';
 import useFetch from '../../../hook/useFetch';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Popularjobs = () => {
   const router = useRouter();
@@ -27,10 +28,12 @@ const Popularjobs = () => {
     setSelectedJob(item.job_id);
   };
 
+  const { isNightMode } = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular Jobs</Text>
+        <Text style={styles.headerTitle(isNightMode)}>Popular Jobs</Text>
         <TouchableOpacity onPress={() => router.push('/search')}>
           <Text style={styles.headerBtn}>View all</Text>
         </TouchableOpacity>

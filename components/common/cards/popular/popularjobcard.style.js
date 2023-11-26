@@ -1,15 +1,26 @@
 import { StyleSheet } from 'react-native';
 
-import { COLORS, FONT, SHADOWS, SIZES } from '../../../../constants';
+import {
+  COLORS,
+  DARK_COLORS,
+  FONT,
+  LIGHT_COLORS,
+  SHADOWS,
+  SIZES,
+} from '../../../../constants';
 
 const styles = StyleSheet.create({
-  container: (selectedJob, item) => ({
+  container: (selectedJob, item, isNightMode) => ({
     width: 250,
     padding: SIZES.xLarge,
-    backgroundColor: selectedJob === item.job_id ? COLORS.primary : '#FFF',
+    backgroundColor:
+      selectedJob === item.job_id
+        ? LIGHT_COLORS.tertiary
+        : isNightMode
+        ? DARK_COLORS.darkGreyInput
+        : '#fff',
     borderRadius: SIZES.medium,
     justifyContent: 'space-between',
-    ...SHADOWS.medium,
     shadowColor: COLORS.white,
   }),
   logoContainer: (selectedJob, item) => ({
@@ -33,10 +44,15 @@ const styles = StyleSheet.create({
   infoContainer: {
     marginTop: SIZES.large,
   },
-  jobName: (selectedJob, item) => ({
+  jobName: (selectedJob, item, isNightMode) => ({
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
-    color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
+    color:
+      selectedJob === item.job_id
+        ? LIGHT_COLORS.lightWhite
+        : isNightMode
+        ? DARK_COLORS.white
+        : LIGHT_COLORS.primary,
   }),
   infoWrapper: {
     flexDirection: 'row',

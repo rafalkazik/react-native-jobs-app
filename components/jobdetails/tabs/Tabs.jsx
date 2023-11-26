@@ -3,10 +3,10 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { SIZES } from '../../../constants';
 import styles from './tabs.style';
 
-const TabButton = ({ name, activeTab, onHandleSearchType }) => {
+const TabButton = ({ name, activeTab, onHandleSearchType, isNightMode }) => {
   return (
     <TouchableOpacity
-      style={styles.btn(name, activeTab)}
+      style={styles.btn(name, activeTab, isNightMode)}
       onPress={onHandleSearchType}
     >
       <Text style={styles.btnText(name, activeTab)}>{name}</Text>
@@ -14,7 +14,7 @@ const TabButton = ({ name, activeTab, onHandleSearchType }) => {
   );
 };
 
-const Tabs = ({ tabs, activeTab, setActiveTab }) => {
+const Tabs = ({ tabs, activeTab, setActiveTab, isNightMode }) => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -24,6 +24,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
             name={item}
             activeTab={activeTab}
             onHandleSearchType={() => setActiveTab(item)}
+            isNightMode={isNightMode}
           />
         )}
         horizontal

@@ -16,10 +16,17 @@ import {
   ScreenHeaderBtn,
   Specifics,
 } from '../../components';
-import { COLORS, icons, SIZES } from '../../constants';
+import {
+  COLORS,
+  DARK_COLORS,
+  LIGHT_COLORS,
+  icons,
+  SIZES,
+} from '../../constants';
 import useFetch from '../../hook/useFetch';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
+import { useTheme } from '../../context/ThemeContext';
 
 const tabs = ['About', 'Qualifications', 'Responsibilities'];
 
@@ -33,6 +40,8 @@ const JobDetails = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
+  const { isNightMode } = useTheme();
 
   const onRefresh = () => {};
 
@@ -77,10 +86,21 @@ const JobDetails = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: isNightMode
+          ? DARK_COLORS.darkGrey
+          : LIGHT_COLORS.lightWhite,
+      }}
+    >
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: COLORS.lightWhite },
+          headerStyle: {
+            backgroundColor: isNightMode
+              ? DARK_COLORS.darkGrey
+              : LIGHT_COLORS.lightWhite,
+          },
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => (
@@ -126,6 +146,7 @@ const JobDetails = () => {
                 tabs={tabs}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
+                isNightMode={isNightMode}
               />
               {displayTabContent()}
             </View>
@@ -136,6 +157,7 @@ const JobDetails = () => {
             data[0]?.job_google_link ??
             'https://www.google.com/about/careers/applications/jobs/results'
           }
+          isNightMode={isNightMode}
         />
       </>
     </SafeAreaView>

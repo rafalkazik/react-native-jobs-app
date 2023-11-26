@@ -1,9 +1,15 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './nearbyjobcard.style';
+import { useTheme } from '../../../../context/ThemeContext';
 
 const NearbyJobCard = ({ job, handleNavigate }) => {
+  const { isNightMode } = useTheme();
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleNavigate}>
+    <TouchableOpacity
+      style={styles.container(isNightMode)}
+      onPress={handleNavigate}
+    >
       <TouchableOpacity style={styles.logoContainer}>
         <Image
           source={{
@@ -18,7 +24,7 @@ const NearbyJobCard = ({ job, handleNavigate }) => {
       </TouchableOpacity>
 
       <View style={styles.textContainer}>
-        <Text style={styles.jobName} numberOfLines={1}>
+        <Text style={styles.jobName(isNightMode)} numberOfLines={1}>
           {job?.job_title}
         </Text>
         <Text style={styles.jobType} numberOfLines={1}>

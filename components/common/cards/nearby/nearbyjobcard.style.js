@@ -1,19 +1,18 @@
 import { StyleSheet } from 'react-native';
 
-import { COLORS, SHADOWS, SIZES } from '../../../../constants';
+import { COLORS, DARK_COLORS, SHADOWS, SIZES } from '../../../../constants';
 
 const styles = StyleSheet.create({
-  container: {
+  container: (isNightMode) => ({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
     padding: SIZES.medium,
     borderRadius: SIZES.small,
-    backgroundColor: '#FFF',
-    ...SHADOWS.medium,
+    backgroundColor: isNightMode ? DARK_COLORS.darkGreyInput : COLORS.white,
     shadowColor: COLORS.white,
-  },
+  }),
   logoContainer: {
     width: 50,
     height: 50,
@@ -30,11 +29,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: SIZES.medium,
   },
-  jobName: {
+  jobName: (isNightMode) => ({
     fontSize: SIZES.medium,
     fontFamily: 'DMBold',
-    color: COLORS.primary,
-  },
+    color: isNightMode ? DARK_COLORS.white : COLORS.primary,
+  }),
   jobType: {
     fontSize: SIZES.small + 2,
     fontFamily: 'DMRegular',

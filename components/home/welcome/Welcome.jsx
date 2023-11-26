@@ -6,10 +6,18 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Switch,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import styles from './welcome.style';
-import { icons, SIZES, COLORS } from '../../../constants';
+import {
+  icons,
+  SIZES,
+  COLORS,
+  LIGHT_COLORS,
+  DARK_COLORS,
+} from '../../../constants';
+import { useTheme } from '../../../context/ThemeContext';
 
 const jobTypes = [
   'Full Time',
@@ -22,14 +30,42 @@ const jobTypes = [
 const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   const router = useRouter();
   const [activeJobType, setActiveJobType] = useState('Full Time');
+
+  const { theme, isNightMode, toggleNightMode } = useTheme();
+
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Rafał</Text>
-        <Text style={styles.welcomeMessage}>Find your dream job</Text>
+        <Text style={styles.userName(isNightMode)}>Hello Rafał</Text>
+        <View style={styles.topContainer}>
+          <Text style={styles.welcomeMessage(isNightMode)}>
+            Find your dream job
+          </Text>
+
+          <View style={styles.nightModeContainer}>
+            <Text
+              style={{
+                color: isNightMode ? DARK_COLORS.gray : LIGHT_COLORS.gray2,
+              }}
+            >
+              {isNightMode ? 'Night Mode' : 'Day Mode'}
+            </Text>
+            <Switch
+              value={isNightMode}
+              onValueChange={toggleNightMode}
+              thumbColor={
+                isNightMode ? DARK_COLORS.lightWhite : LIGHT_COLORS.lightWhite
+              }
+              trackColor={{
+                false: LIGHT_COLORS.lightWhite,
+                true: DARK_COLORS.tertiary,
+              }}
+            />
+          </View>
+        </View>
       </View>
       <View style={styles.searchContainer}>
-        <View style={styles.searchWrapper}>
+        <View style={styles.searchWrapper(isNightMode)}>
           <TextInput
             style={styles.searchInput}
             value={searchTerm}
@@ -37,7 +73,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
               setSearchTerm(text);
             }}
             placeholder='Search for a job'
-            placeholderTextColor={`${COLORS.gray}`}
+            placeholderTextColor={`${LIGHT_COLORS.gray}`}
           />
         </View>
 

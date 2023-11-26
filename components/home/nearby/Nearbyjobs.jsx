@@ -4,6 +4,7 @@ import styles from './nearbyjobs.style';
 import { COLORS } from '../../../constants';
 import NearbyJobCard from '../../common/cards/nearby/NearbyJobCard';
 import useFetch from '../../../hook/useFetch';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Nearbyjobs = () => {
   const router = useRouter();
@@ -13,10 +14,12 @@ const Nearbyjobs = () => {
     num_pages: 1,
   });
 
+  const { isNightMode } = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Nearby Jobs</Text>
+        <Text style={styles.headerTitle(isNightMode)}>Nearby Jobs</Text>
         <TouchableOpacity onPress={() => router.push('/search')}>
           <Text style={styles.headerBtn}>View all</Text>
         </TouchableOpacity>

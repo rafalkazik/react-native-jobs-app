@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './popularjobcard.style';
+import { useTheme } from '../../../../context/ThemeContext';
 
 const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
+  const { isNightMode } = useTheme();
+
   return (
     <TouchableOpacity
-      style={styles.container(selectedJob, item)}
+      style={styles.container(selectedJob, item, isNightMode)}
       onPress={() => handleCardPress(item)}
     >
       <TouchableOpacity style={styles.logoContainer(selectedJob, item)}>
@@ -25,7 +28,10 @@ const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
       </Text>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.jobName(selectedJob, item)} numberOfLines={1}>
+        <Text
+          style={styles.jobName(selectedJob, item, isNightMode)}
+          numberOfLines={1}
+        >
           {item?.job_title}
         </Text>
         <Text style={styles.location} numberOfLines={1}>

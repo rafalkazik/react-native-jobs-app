@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './company.style';
 import { icons } from '../../../constants';
+import { useTheme } from '../../../context/ThemeContext';
 
 const Company = ({ companyLogo, jobTitle, companyName, location }) => {
+  const { isNightMode } = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.logoBox}>
@@ -19,10 +22,10 @@ const Company = ({ companyLogo, jobTitle, companyName, location }) => {
         />
       </View>
       <View style={styles.jobTitleBox}>
-        <Text style={styles.jobTitle}>{jobTitle}</Text>
+        <Text style={styles.jobTitle(isNightMode)}>{jobTitle}</Text>
       </View>
       <View style={styles.companyInfoBox}>
-        <Text style={styles.companyName}>{companyName} / </Text>
+        <Text style={styles.companyName(isNightMode)}>{companyName} / </Text>
         <View style={styles.locationBox}>
           <Image
             source={icons.location}
