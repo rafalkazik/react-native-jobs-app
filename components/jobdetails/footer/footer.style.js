@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   },
   applyBtn: {
     flex: 1,
+    padding: SIZES.medium,
     backgroundColor: LIGHT_COLORS.tertiary,
     height: '100%',
     justifyContent: 'center',

@@ -8,7 +8,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isNightMode, setIsNightMode] = useState(false);
+  const [isNightMode, setIsNightMode] = useState(true);
 
   const toggleNightMode = () => {
     setIsNightMode((prev) => !prev);

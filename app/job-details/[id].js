@@ -84,7 +84,6 @@ const JobDetails = () => {
       console.error(error);
     }
   };
-
   return (
     <SafeAreaView
       style={{

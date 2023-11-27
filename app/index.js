@@ -29,7 +29,6 @@ import { useTheme } from '../context/ThemeContext';
 const menuList = [
   { key: 'Home', url: '/' },
   { key: 'About', url: '/about' },
-  { key: 'Favourites', url: '/favourites' },
   { key: 'Contact', url: '/contact' },
 ];
 
