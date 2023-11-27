@@ -56,12 +56,13 @@ const styles = StyleSheet.create({
     gap: 10,
     minWidth: 50,
   },
-  searchInput: {
+  searchInput: (isNightMode) => ({
     fontFamily: FONT.regular,
     width: '100%',
     height: '100%',
     paddingHorizontal: SIZES.medium,
-  },
+    color: isNightMode ? DARK_COLORS.white : COLORS.primary,
+  }),
   searchBtn: {
     width: 50,
     height: '100%',

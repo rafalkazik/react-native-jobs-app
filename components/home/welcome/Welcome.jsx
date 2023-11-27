@@ -67,7 +67,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
       <View style={styles.searchContainer}>
         <View style={styles.searchWrapper(isNightMode)}>
           <TextInput
-            style={styles.searchInput}
+            style={styles.searchInput(isNightMode)}
             value={searchTerm}
             onChangeText={(text) => {
               setSearchTerm(text);
