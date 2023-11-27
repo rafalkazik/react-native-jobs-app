@@ -34,9 +34,6 @@ const Popularjobs = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle(isNightMode)}>Popular Jobs</Text>
-        <TouchableOpacity onPress={() => router.push('/search')}>
-          <Text style={styles.headerBtn}>View all</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.cardsContainer}>

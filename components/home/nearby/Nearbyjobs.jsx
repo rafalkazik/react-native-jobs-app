@@ -20,9 +20,6 @@ const Nearbyjobs = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle(isNightMode)}>Nearby Jobs</Text>
-        <TouchableOpacity onPress={() => router.push('/search')}>
-          <Text style={styles.headerBtn}>View all</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.cardsContainer}>
